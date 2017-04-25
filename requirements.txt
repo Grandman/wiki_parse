@@ -1,3 +1,6 @@
 wikipedia
 treelib
 owlready
+Django>=1.8,<2.0
+psycopg2
+django-bootstrap3
