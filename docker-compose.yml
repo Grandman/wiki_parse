@@ -1,9 +1,23 @@
 version: '2'
 services:
   db:
+     networks:
+       - back
      image: postgres
+  neo4j:
+     networks:
+       - back
+     image: neo4j:3.0
+     ports:
+       - "17474:7474"
+       - "7687:7687"
+
+     volumes:                  ## adds folder with login/password
+       - ./db/dbms:/data/dbms
   web:
      build: .
+     networks:
+      - back
      command: python3 manage.py runserver 0.0.0.0:8000
      volumes:
        - .:/code
@@ -11,3 +25,7 @@ services:
        - "8000:8000"
      depends_on:
        - db
+     links:
+       - neo4j
+networks:
+  back:
