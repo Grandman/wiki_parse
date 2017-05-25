@@ -46,7 +46,10 @@ classes = programming.classes
 string_classes = [str(e) for e in classes]
 lang = 'ru'
 wikipedia.set_lang(lang)
-query = 'Программирование'
+find_word = sys.argv[1].lower()
+finded_words = wikipedia.search(find_word)
+print(finded_words)
+query = finded_words[0]
 page = wikipedia.page(query)
 tx = graph.begin()
 a = Node("Notion", name=query)
@@ -86,7 +89,7 @@ def doWork():
               arr = set(words) & set(instances)
               # print("length first" + str(len(instances)))
               # print("length second" + str(len(arr)))
-              if (len(arr) > 0 and len(arr) / len(instances) > 0.4):
+              if (len(arr) > 0 and len(arr) / len(instances) > 0.6):
                   passed = True
             # print(words)
             #####
