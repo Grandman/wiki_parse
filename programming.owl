@@ -13,42 +13,147 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <Class IRI="#языки_программирования"/>
+        <NamedIndividual IRI="#программа"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#разработка_через_тестирование"/>
+        <Class IRI="#языки_программирования"/>
     </Declaration>
     <Declaration>
         <Class IRI="#python"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#рефакторинг"/>
+        <NamedIndividual IRI="#рекурсия"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#методологии"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#программирование"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#техника"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#тест"/>
+        <NamedIndividual IRI="#компилируемый"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#код"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#высокоуровневый"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#интерпретируемый"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#язык"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#заказчик"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#программирование"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#разработка"/>
     </Declaration>
+    <Declaration>
+        <Class IRI="#аспектно-ориентированое_программирование"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#объектно-ориентированное_программирование"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#продукт"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#правило"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#методологии"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#клиент"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#требование"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#техника"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#многопоточность"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#тест"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#последовательность"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#итерация"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#компонентно-ориентированое_программирование"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#парадигмы_программирования"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#разработка_через_тестирование"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#архитектура"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#рефакторинг"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#цикл"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#процедура"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#agile"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#процедурное_программирование"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#функция"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#c++"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#алгоритм"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#фортран"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#agile"/>
+        <Class IRI="#методологии"/>
+    </SubClassOf>
     <SubClassOf>
         <Class IRI="#python"/>
         <Class IRI="#языки_программирования"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#аспектно-ориентированое_программирование"/>
+        <Class IRI="#парадигмы_программирования"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#компонентно-ориентированое_программирование"/>
+        <Class IRI="#парадигмы_программирования"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#методологии"/>
         <Class IRI="#программирование"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#объектно-ориентированное_программирование"/>
+        <Class IRI="#парадигмы_программирования"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#парадигмы_программирования"/>
+        <Class IRI="#программирование"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#процедурное_программирование"/>
+        <Class IRI="#парадигмы_программирования"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#разработка_через_тестирование"/>
@@ -58,13 +163,85 @@
         <Class IRI="#языки_программирования"/>
         <Class IRI="#программирование"/>
     </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#c++"/>
+        <Class IRI="#языки_программирования"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#языки_программирования"/>
+        <NamedIndividual IRI="#алгоритм"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#архитектура"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#python"/>
+        <NamedIndividual IRI="#высокоуровневый"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#заказчик"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#python"/>
+        <NamedIndividual IRI="#интерпретируемый"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#итерация"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#клиент"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#код"/>
+    </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#разработка_через_тестирование"/>
         <NamedIndividual IRI="#код"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#c++"/>
+        <NamedIndividual IRI="#компилируемый"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#python"/>
+        <NamedIndividual IRI="#многопоточность"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#языки_программирования"/>
+        <NamedIndividual IRI="#последовательность"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#языки_программирования"/>
+        <NamedIndividual IRI="#правило"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#языки_программирования"/>
+        <NamedIndividual IRI="#программа"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#продукт"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#процедурное_программирование"/>
+        <NamedIndividual IRI="#процедура"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#разработка"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#разработка_через_тестирование"/>
         <NamedIndividual IRI="#разработка"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#процедурное_программирование"/>
+        <NamedIndividual IRI="#рекурсия"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#разработка_через_тестирование"/>
@@ -75,8 +252,40 @@
         <NamedIndividual IRI="#тест"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#техника"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#разработка_через_тестирование"/>
         <NamedIndividual IRI="#техника"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#требование"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#процедурное_программирование"/>
+        <NamedIndividual IRI="#фортран"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#c++"/>
+        <NamedIndividual IRI="#функция"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#agile"/>
+        <NamedIndividual IRI="#цикл"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#python"/>
+        <NamedIndividual IRI="#язык"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#языки_программирования"/>
+        <NamedIndividual IRI="#язык"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#c++"/>
+        <NamedIndividual IRI="#язык"/>
     </ClassAssertion>
 </Ontology>
 

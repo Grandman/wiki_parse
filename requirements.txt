@@ -2,6 +2,8 @@ wikipedia
 treelib
 owlready
 py2neo
+nltk
+pymorphy2
 Django>=1.8,<2.0
 psycopg2
 django-bootstrap3
