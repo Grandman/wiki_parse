@@ -99,7 +99,6 @@ def doWork():
                q.task_done()
                continue
 
-            types.new_class(prepareClassName(node.name),(Thing,), kwds = { "ontology" : programming })
             page = wikipedia.page(node.name)
             #######
             words = normalize_words(page.content)
@@ -129,6 +128,7 @@ def doWork():
                 tx.create(ab)
                 tx.commit()
                 ##########
+                types.new_class(prepareClassName(node.name),(Thing,), kwds = { "ontology" : programming })
 
                 if (node.level + 1 <= max_level):
                     for name in links:
