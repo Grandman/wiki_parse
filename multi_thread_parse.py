@@ -9,6 +9,7 @@ import string
 import pymorphy2
 from nltk.corpus import stopwords
 from owlready import *
+import types
 
 class NodeElement:
     def __init__(self, name, parent, level):
@@ -33,6 +34,9 @@ def normalize_words(text):
 
     return normalized_words
 
+def prepareClassName(name):
+    return re.sub('[^a-zа-я0-9]', '_', name.lower())
+
 concurrent = 100
 
 
@@ -40,7 +44,7 @@ authenticate("neo4j:7474", "neo4j", "123")
 graph = Graph("http://neo4j:7474/db/data/")
 graph.run("MATCH (n) DETACH DELETE n")
 
-programming = get_ontology('file:///code/test.owl')
+programming = get_ontology('file:///code/static/test.owl')
 programming.load()
 
 classes = programming.classes
@@ -56,18 +60,25 @@ query = finded_words[0]
 page = wikipedia.page(query)
 tx = graph.begin()
 a = Node("Notion", name=query)
+
 node = tx.create(a)
 tx.commit()
+types.new_class(prepareClassName(query),(Thing,), kwds = { "ontology" : programming })
 visited_links = []
 array = page.links
+saved = False
 
 def doWork():
     itera = 0
     global visited_links
+    global saved
     while True:
         try:
             if q.empty():
               print("empty")
+              if (saved == False):
+                  saved = True
+                  programming.save()
               break
             node = q.get_nowait()
             if (node.level > max_level):
@@ -88,6 +99,7 @@ def doWork():
                q.task_done()
                continue
 
+            types.new_class(prepareClassName(node.name),(Thing,), kwds = { "ontology" : programming })
             page = wikipedia.page(node.name)
             #######
             words = normalize_words(page.content)
@@ -118,8 +130,9 @@ def doWork():
                 tx.commit()
                 ##########
 
-                for name in links:
-                    q.put_nowait(NodeElement(name, node.name, node.level + 1))
+                if (node.level + 1 <= max_level):
+                    for name in links:
+                        q.put_nowait(NodeElement(name, node.name, node.level + 1))
                 visited_links.extend(links)
             itera += 1
             print(itera)

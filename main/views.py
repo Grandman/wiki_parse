@@ -21,7 +21,7 @@ def parse(request):
         second_query = form.cleaned_data['last_word'].lower()
         max_level = form.cleaned_data['max_level']
         coefficient = form.cleaned_data['coefficient']
-        file_path = '/code/test.owl'
+        file_path = '/code/static/test.owl'
         handle_uploaded_file(request.FILES['file'], file_path)
 
         lang = 'ru'
