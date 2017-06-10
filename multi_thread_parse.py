@@ -38,8 +38,9 @@ concurrent = 100
 
 authenticate("neo4j:7474", "neo4j", "123")
 graph = Graph("http://neo4j:7474/db/data/")
+graph.run("MATCH (n) DETACH DELETE n")
 
-programming = get_ontology('file:///code/programming.owl')
+programming = get_ontology('file:///code/test.owl')
 programming.load()
 
 classes = programming.classes
@@ -47,6 +48,8 @@ string_classes = [str(e) for e in classes]
 lang = 'ru'
 wikipedia.set_lang(lang)
 find_word = sys.argv[1].lower()
+max_level = int(sys.argv[3])
+coefficient = float(sys.argv[4])
 finded_words = wikipedia.search(find_word)
 print(finded_words)
 query = finded_words[0]
@@ -63,21 +66,27 @@ def doWork():
     global visited_links
     while True:
         try:
+            if q.empty():
+              print("empty")
+              break
             node = q.get_nowait()
+            if (node.level > max_level):
+                q.task_done()
+                continue
             # print(title)
             if node.name in visited_links:
                #  print('already visited')
-               # a = graph.find_one(label="Notion", property_key='name', property_value=node.parent)
-               # b = graph.find_one(label="Notion", property_key='name', property_value=node.name)
-               # if b is None:
-              #      q.task_done()
-              #      continue
-              #  tx = graph.begin()
-              #  ab = Relationship(a, "depends", b)
-              #  tx.create(ab)
-              #  tx.commit()
-                q.task_done()
-                continue
+               a = graph.find_one(label="Notion", property_key='name', property_value=node.parent)
+               b = graph.find_one(label="Notion", property_key='name', property_value=node.name)
+               if b is None:
+                   q.task_done()
+                   continue
+               tx = graph.begin()
+               ab = Relationship(a, "depends", b)
+               tx.create(ab)
+               tx.commit()
+               q.task_done()
+               continue
 
             page = wikipedia.page(node.name)
             #######
@@ -89,7 +98,7 @@ def doWork():
               arr = set(words) & set(instances)
               # print("length first" + str(len(instances)))
               # print("length second" + str(len(arr)))
-              if (len(arr) > 0 and len(arr) / len(instances) > 0.6):
+              if (len(arr) > 0 and len(arr) / len(instances) > coefficient):
                   passed = True
             # print(words)
             #####

@@ -1,2 +1,90 @@
-SUCCESS!!
-{{ result }}
+{% load static %}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+<script type="text/javascript" src="{% static "main/js/jquery-3.2.1.min.js" %}"></script>
+{% bootstrap_javascript %}
+
+<link rel="stylesheet" href="{% static "main/styles/codemirror.css" %}">
+<link rel="stylesheet" href="{% static "main/styles/codemirror-neo.css" %}">
+<link rel="stylesheet" href="{% static "main/styles/cy2neo.css" %}">
+<link rel="stylesheet" href="{% static "main/styles/neod3.css" %}">
+<link rel="stylesheet" href="{% static "main/styles/datatable.css" %}">
+<link rel="stylesheet" href="{% static "main/styles/vendor.css" %}"> <!-- bootstrap-->
+<link rel="stylesheet" href="{% static "main/styles/sweet-alert.css" %}">
+<link rel="stylesheet" href="{% static "main/styles/gh-fork-ribbon.css" %}">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+	  Процесс запущен
+	  <br>
+	  Текущий статус:
+	  <div class="status"></div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div role="tabpanel">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#main" aria-controls="home" role="tab" data-toggle="tab">Общий граф</a></li>
+            <li role="presentation"><a href="#table" aria-controls="table" role="tab" data-toggle="tab">Граф на основе двух понятий</a></li>
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="main">
+                <br/>
+                <button type="button" id="execute" class='btn btn-primary'>Построить граф</button>
+                <div class="tab-pane active" id="graph">&nbsp;</div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="table">
+               <br />
+               <input class="form-control" type="text" placeholder="Первое понятие" id='first_word'/><br/>
+               <input class="form-control" type="text" placeholder="Второе понятие" id='second_word'/><br/>
+               <input class="form-control" type="text" placeholder="Максимальная длина пути" id="max_length"/><br/>
+               <button type="button" id="get_path" class='btn btn-primary'>Построить граф</button>
+               <div id="path_graph"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static "main/js/jquery-3.2.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "main/js/d3.min.js" %}"></script>
+<script src="{% static "main/js/scripts/codemirror.js" %}"></script>
+<script src="{% static "main/js/scripts/codemirror-cypher.js" %}"></script>
+<script src="{% static "main/js/scripts/vendor.js" %}"></script>
+<script src="{% static "main/js/scripts/sweet-alert.min.js" %}"></script>
+<script src="{% static "main/js/scripts/neod3.js" %}"></script>
+<script src="{% static "main/js/scripts/neod3-visualization.js" %}"></script>
+<script src="{% static "main/js/scripts/neo4d3.js" %}"></script>
+<script src="{% static "main/js/scripts/cy2neod3.js" %}"></script>
+<script src="{% static "main/js/scripts/jquery.dataTables.min.js" %}"></script>
+<script src="{% static "main/js/scripts/cypher.datatable.js" %}"></script>
+<script>
+(function worker() {
+$.get('status/', function(data) {
+
+    // Now that we've completed the request schedule the next one.
+    if(data.indexOf('True') !== -1) {
+        $('.status').html('Выполняется');
+	setTimeout(worker, 2000);
+    }
+    else {
+        $('.status').html('Завершен');
+    }
+  });
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    //todo dynamic configuration
+    var config = {}
+    var connection = function() { return {url: 'http://localhost:17474', user:'neo4j',pass:'123'};  }
+    new Cy2NeoD3(config,"graph","datatable","cypher","execute", connection , true);
+  });
+</script>
+
