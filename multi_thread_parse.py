@@ -36,6 +36,8 @@ def normalize_words(text):
 
 def prepareClassName(name):
     return re.sub('[^a-zа-я0-9]', '_', name.lower())
+def transformIndividual(name):
+    return re.sub('\_individual$', '', str(name))
 
 concurrent = 100
 
@@ -105,7 +107,7 @@ def doWork():
             passed = False
             for c in classes:
               # print(c)
-              instances = list(map(str, c.instances()))
+              instances = list(map(transformIndividual, c.instances()))
               arr = set(words) & set(instances)
               # print("length first" + str(len(instances)))
               # print("length second" + str(len(arr)))

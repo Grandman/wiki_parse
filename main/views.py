@@ -25,7 +25,7 @@ def parse(request):
         handle_uploaded_file(request.FILES['file'], file_path)
 
         lang = 'ru'
-        process = subprocess.Popen(['python3', 'multi_thread_parse.py', query, second_query, str(max_level), str(coefficient)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python3', 'multi_thread_parse.py', query, second_query, str(max_level), str(coefficient)])
         request.session['process'] = process.pid
         return render(request, 'main/parse.html', {'result': process })
 def status(request):

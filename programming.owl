@@ -118,7 +118,7 @@
         <Class IRI="#c++"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#алгоритм"/>
+        <NamedIndividual IRI="#алгоритм_individual"/>
     </Declaration>
     <Declaration>
         <Class IRI="#язык_программирования"/>
@@ -395,15 +395,15 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#алгоритм_обхода_дерева"/>
-        <NamedIndividual IRI="#алгоритм"/>
+        <NamedIndividual IRI="#алгоритм_individual"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#сортировка"/>
-        <NamedIndividual IRI="#алгоритм"/>
+        <NamedIndividual IRI="#алгоритм_individual"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#язык_программирования"/>
-        <NamedIndividual IRI="#алгоритм"/>
+        <NamedIndividual IRI="#алгоритм_individual"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#agile"/>
