@@ -8,6 +8,7 @@ from treelib import Node, Tree
 from owlready import *
 import subprocess
 import psutil
+from pathlib import Path
 
 
 def index(request):
@@ -15,6 +16,10 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 def parse(request):
+    try:
+        os.remove("/code/static/test_complete.owl")
+    except FileNotFoundError:
+        pass
     form = WordsForm(request.POST, request.FILES)
     if form.is_valid():
         query = form.cleaned_data['first_word']
@@ -27,10 +32,14 @@ def parse(request):
         lang = 'ru'
         process = subprocess.Popen(['python3', 'multi_thread_parse.py', query, second_query, str(max_level), str(coefficient)])
         request.session['process'] = process.pid
+        print(process.pid)
         return render(request, 'main/parse.html', {'result': process })
 def status(request):
   pid = request.session.get('process')
   status = psutil.pid_exists(pid)
+  if (status == True):
+    file = Path("/code/static/test_complete.owl")
+    status = not file.is_file()
   return render(request, 'main/status.html', {'result': status})
 
 def handle_uploaded_file(f, path):

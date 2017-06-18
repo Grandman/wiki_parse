@@ -1,5 +1,6 @@
 from threading import Thread
 import sys
+import os
 import queue
 import time
 import wikipedia
@@ -10,7 +11,13 @@ import pymorphy2
 from nltk.corpus import stopwords
 from owlready import *
 import types
+from pathlib import Path
+from shutil import copyfile
 
+try:
+    os.remove("/code/static/test_complete.owl")
+except FileNotFoundError:
+    pass
 class NodeElement:
     def __init__(self, name, parent, level):
         self.name = name
@@ -39,7 +46,7 @@ def prepareClassName(name):
 def transformIndividual(name):
     return re.sub('\_individual$', '', str(name))
 
-concurrent = 100
+concurrent = 20
 
 
 authenticate("neo4j:7474", "neo4j", "123")
@@ -74,6 +81,7 @@ def doWork():
     itera = 0
     global visited_links
     global saved
+    global coefficient
     while True:
         try:
             if q.empty():
@@ -81,6 +89,8 @@ def doWork():
               if (saved == False):
                   saved = True
                   programming.save()
+                  copyfile("/code/static/test.owl", "/code/static/test_complete.owl")
+                  os._exit(1)
               break
             node = q.get_nowait()
             if (node.level > max_level):
@@ -131,10 +141,9 @@ def doWork():
                 tx.commit()
                 ##########
                 types.new_class(prepareClassName(node.name),(Thing,), kwds = { "ontology" : programming })
-
-                if (node.level + 1 <= max_level):
-                    for name in links:
-                        q.put_nowait(NodeElement(name, node.name, node.level + 1))
+                print(links)
+                for name in links:
+                    q.put_nowait(NodeElement(name, node.name, node.level + 1))
                 visited_links.extend(links)
             itera += 1
             print(itera)
